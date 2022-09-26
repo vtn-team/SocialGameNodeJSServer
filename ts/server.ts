@@ -177,7 +177,14 @@ async function run(req: any, res: any, route: any) {
 			}else{
 				res.writeHead(200, {'Content-Type': 'application/json'});
 			}
-			res.write(JSON.stringify(result, null ,2));
+			if(typeof result == "object")
+			{
+				res.write(JSON.stringify(result, null ,2));
+			}
+			else
+			{
+				res.write(result);
+			}
 			res.end();
 		}
 	}

@@ -13,7 +13,8 @@ export async function get(req: any,res: any,route: any)
 	if(route.query.index) index = route.query.index;
 	
 	console.log("get here");
-	return liveget(route.query.id, index);
+	var result = liveget(route.query.id, index);
+	return "" + result[0] + "," + new Uint8Array(result[1]);
 }
 
 export async function cmd(req: any,res: any,route: any)
