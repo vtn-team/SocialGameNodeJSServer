@@ -171,18 +171,24 @@ async function run(req: any, res: any, route: any) {
 			res.write("run..." + route.action);
 			res.end();
 		}else{
-			if(result.statusCode)
-			{
-				res.writeHead(result.statusCode, {'Content-Type': 'application/json'});
-			}else{
-				res.writeHead(200, {'Content-Type': 'application/json'});
-			}
 			if(typeof result == "object")
 			{
+				if(result.statusCode)
+				{
+					res.writeHead(result.statusCode, {'Content-Type': 'application/json'});
+				}else{
+					res.writeHead(200, {'Content-Type': 'application/json'});
+				}
 				res.write(JSON.stringify(result, null ,2));
 			}
 			else
 			{
+				if(result.statusCode)
+				{
+					res.writeHead(result.statusCode, {'Content-Type': 'text/plain'});
+				}else{
+					res.writeHead(200, {'Content-Type': 'text/plain'});
+				}
 				res.write(result);
 			}
 			res.end();
