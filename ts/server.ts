@@ -1,6 +1,7 @@
 const http = require('http');
 const qs = require('querystring');
 const Routes = require('./apiRoute').Routes;
+import { getCache, updateToken } from "./lib/userCache"
 
 function check(method: string, url: string)
 {
@@ -165,7 +166,32 @@ async function run(req: any, res: any, route: any) {
 			res.end();
 			return ;
 		}
+		
+		//session check
+		route.session = getCache(route.query.session);
+		console.log(target);
+		console.log(route.session);
+		if(target != "login" && !route.session) {
+			res.writeHead(503, {'Content-Type': 'text/html'});
+			res.write("invalid session.");
+			res.end();
+			return ;
+		}
+		//POSTの場合重複送信を避けるためtokenを確認
+		if(req.method == "POST") {
+			if(target != "login" && route.query.token != route.session.token) {
+				res.writeHead(503, {'Content-Type': 'text/html'});
+				res.write("already send.");
+				res.end();
+				return ;
+			}
+		}
+		
 		let result = await apiScript[target](req,res,route);
+		//POSTの場合重複送信を避けるためtokenを更新
+		if(target != "login" && req.method == "POST") {
+			result.token = updateToken(route.query.session);
+		}
 		if(!result) {
 			res.writeHead(200, {'Content-Type': 'text/html'});
 			res.write("run..." + route.action);
