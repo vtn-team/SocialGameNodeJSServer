@@ -21,8 +21,19 @@ export async function login(req: any,res: any,route: any)
 	
 	//
 	const result = await query("SELECT * FROM User WHERE udid = ?",[route.query.udid]);
-	console.log(result);
-	return { status: 200 };
+	if(result.length == 0)
+	{
+	  return { status: 400 };
+	}
+	
+	return { 
+		status: 200,
+		session:key, 
+		token: session.token,
+		udid: result[0].udid,
+		name: result[0].name,
+		id: Number(result[0].id)
+	};
 }
 
 export async function create(req: any,res: any,route: any)
