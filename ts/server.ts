@@ -1,6 +1,7 @@
 const http = require('http');
 const qs = require('querystring');
 const Routes = require('./apiRoute').Routes;
+const Auth = require('./apiRoute').Auth;
 import { getCache, updateToken } from "./lib/userCache"
 
 function check(method: string, url: string)
@@ -124,25 +125,36 @@ function check(method: string, url: string)
 		}
 		uri_key++;
 	}
-	
-  //routeがobjectの場合、"/"かNot Foundを返す
-  if( typeof route == "object" )
-  {
-  	if( "/" in route )
-  	{
-  		route = route["/"];
-  	}else{
-  		//Not found
-  		route = null;
-  	}
-  }
+
+	//routeがobjectの場合、"/"かNot Foundを返す
+	if( typeof route == "object" )
+	{
+		if( "/" in route )
+		{
+			route = route["/"];
+		}else{
+			//Not found
+			route = null;
+		}
+	}
 	
 	var actions = ["",""];
 	if( route ) {
 		actions = route.split('#')
 	}
+	
+	var isAuth = Auth.UseSessionAuth;
+	if(Auth.PassThroughRoute[method])
+	{
+		if(Auth.PassThroughRoute[method].indexOf(actions[0]) != -1)
+		{
+			isAuth = false;
+		}
+	}
+	
 	var result = {
 		route: route,
+		auth: isAuth,
 		action: actions[0],
 		target: actions[1],
 		query : variables
@@ -167,10 +179,10 @@ async function run(req: any, res: any, route: any) {
 			return ;
 		}
 		
-		if(target != "login" && req.method == "POST") {
-			//session check
+		//session check
+		if(route.auth)
+		{
 			route.session = getCache(route.query.session);
-			console.log(target);
 			console.log(route.session);
 			if(target != "login" && !route.session) {
 				res.writeHead(503, {'Content-Type': 'text/html'});
@@ -178,12 +190,15 @@ async function run(req: any, res: any, route: any) {
 				res.end();
 				return ;
 			}
-			//POSTの場合重複送信を避けるためtokenを確認
-			if(target != "login" && route.query.token != route.session.token) {
-				res.writeHead(503, {'Content-Type': 'text/html'});
-				res.write("already send.");
-				res.end();
-				return ;
+			if(target != "login" && req.method == "POST") {
+				console.log(target);
+				//POSTの場合重複送信を避けるためtokenを確認
+				if(target != "login" && route.query.token != route.session.token) {
+					res.writeHead(503, {'Content-Type': 'text/html'});
+					res.write("already send.");
+					res.end();
+					return ;
+				}
 			}
 		}
 		

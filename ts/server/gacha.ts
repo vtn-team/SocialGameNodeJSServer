@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require('uuid')
 import { query } from "./../lib/database"
+import { getCache } from "./../lib/userCache"
 import { getMaster, getCard } from "./../lib/masterDataCache"
 
 export async function index(req: any,res: any,route: any)
@@ -76,6 +77,14 @@ export function drawGachaSpecial(sheet: string)
 //重みづけ確率
 export async function draw(req: any,res: any,route: any)
 {
+	console.log(route.query.session);
+	let session = getCache(route.query.session);
+	console.log(session);
+	if(!session)
+	{
+	  return { status: 200 };
+	}
+	
 	//リソースひいたりする
 	//
 	
@@ -96,7 +105,12 @@ export async function draw(req: any,res: any,route: any)
 	}
 	
 	//保存
-	
+	//
+	for(let c of drawIds)
+	{
+		const result = await query("INSERT INTO UserCards(userId, cardId, level) VALUES(?,?,1)",[session.userId, c]);
+		console.log(result);
+	}
 	//
 	
 	return {

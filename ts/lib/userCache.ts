@@ -9,11 +9,19 @@ export function updateCache(uuid: string)
   key = key.replace(/-/g,"");
   token = token.replace(/-/g,"");
   cache[key] = {
-    uuid: uuid,
+    udid: uuid,
     token: token,
     time: (new Date()).getTime()
   };
   return key;
+}
+
+export function updateData(key: string, dataKey: string, data: any)
+{
+  if(!cache[key]) return false;
+  
+  cache[key][dataKey] = data;
+  return true;
 }
 
 export function updateToken(key: string)

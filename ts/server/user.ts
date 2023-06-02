@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid')
 import { query } from "./../lib/database"
-import { getCache, updateCache } from "./../lib/userCache"
+import { getCache, updateCache, updateData } from "./../lib/userCache"
 
 export async function index(req: any,res: any,route: any)
 {
@@ -13,7 +13,7 @@ export async function login(req: any,res: any,route: any)
 	let key = updateCache(route.query.udid);
 	let session = getCache(key);
 	
-	//user create
+	//user cache
 	if(!route.query.udid)
 	{
 	  return { status: 200, session:key, token: session.token };
@@ -25,6 +25,9 @@ export async function login(req: any,res: any,route: any)
 	{
 	  return { status: 400 };
 	}
+	
+	//userIdをキャッシュに記録する
+	updateData(key, "userId", Number(result[0].id));
 	
 	return { 
 		status: 200,
