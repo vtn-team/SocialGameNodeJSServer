@@ -167,18 +167,18 @@ async function run(req: any, res: any, route: any) {
 			return ;
 		}
 		
-		//session check
-		route.session = getCache(route.query.session);
-		console.log(target);
-		console.log(route.session);
-		if(target != "login" && !route.session) {
-			res.writeHead(503, {'Content-Type': 'text/html'});
-			res.write("invalid session.");
-			res.end();
-			return ;
-		}
-		//POSTの場合重複送信を避けるためtokenを確認
-		if(req.method == "POST") {
+		if(target != "login" && req.method == "POST") {
+			//session check
+			route.session = getCache(route.query.session);
+			console.log(target);
+			console.log(route.session);
+			if(target != "login" && !route.session) {
+				res.writeHead(503, {'Content-Type': 'text/html'});
+				res.write("invalid session.");
+				res.end();
+				return ;
+			}
+			//POSTの場合重複送信を避けるためtokenを確認
 			if(target != "login" && route.query.token != route.session.token) {
 				res.writeHead(503, {'Content-Type': 'text/html'});
 				res.write("already send.");
