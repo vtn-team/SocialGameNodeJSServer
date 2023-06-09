@@ -82,6 +82,7 @@ export async function draw(req: any,res: any,route: any)
 	console.log(session);
 	if(!session)
 	{
+	  console.log("err");
 	  return { status: 200 };
 	}
 	
@@ -104,6 +105,7 @@ export async function draw(req: any,res: any,route: any)
 		drawIds.push(id);
 	}
 	
+	/*
 	//保存
 	//
 	for(let c of drawIds)
@@ -112,7 +114,8 @@ export async function draw(req: any,res: any,route: any)
 		console.log(result);
 	}
 	//
-	
+	*/
+	  console.log("here");
 	return {
 		status: 200,
 		cardIds: drawIds
@@ -122,6 +125,9 @@ export async function draw(req: any,res: any,route: any)
 //テスト
 export async function test(req: any,res: any,route: any)
 {
+	var master = getMaster("Gacha");
+	console.log(master);
+	
 	let drawTests:any = {};
 	let rareTest:any = {};
 	for(let i=0; i<1000000; ++i)

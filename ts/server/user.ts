@@ -12,7 +12,7 @@ export async function login(req: any,res: any,route: any)
 {
 	let key = updateCache(route.query.udid);
 	let session = getCache(key);
-	
+
 	//user cache
 	if(!route.query.udid)
 	{

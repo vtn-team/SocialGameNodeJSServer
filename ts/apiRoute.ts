@@ -9,6 +9,9 @@ exports.Routes = {
 			"/test4" : "gacha#test4",
 			"/test5" : "gacha#test5"
 		},
+		"/stat" : {
+			"/" : "stat#check"
+		},
 		"/ud" : {
 			"/cards" : "userdata#cards",
 		}
@@ -29,6 +32,6 @@ exports.Routes = {
 exports.Auth = {
 	UseSessionAuth: true,
 	PassThroughRoute: {
-		GET: ["gacha"]
+		GET: ["stat","gacha"]
 	}
 };
