@@ -1,0 +1,110 @@
+{
+  "Version": 28,
+  "Data": [
+    {
+      "Id": "1",
+      "Name": "ItemName1",
+      "Resource": "item1",
+      "Type": "1",
+      "EffectId": "101"
+    },
+    {
+      "Id": "2",
+      "Name": "ItemName2",
+      "Resource": "item2",
+      "Type": "1",
+      "EffectId": "102"
+    },
+    {
+      "Id": "3",
+      "Name": "ItemName3",
+      "Resource": "item3",
+      "Type": "2",
+      "EffectId": "103"
+    },
+    {
+      "Id": "4",
+      "Name": "ItemName4",
+      "Resource": "item4",
+      "Type": "2",
+      "EffectId": "104"
+    },
+    {
+      "Id": "5",
+      "Name": "ItemName5",
+      "Resource": "item5",
+      "Type": "2",
+      "EffectId": "105"
+    },
+    {
+      "Id": "6",
+      "Name": "ItemName6",
+      "Resource": "item6",
+      "Type": "3",
+      "EffectId": "106"
+    },
+    {
+      "Id": "7",
+      "Name": "ItemName7",
+      "Resource": "item7",
+      "Type": "3",
+      "EffectId": "107"
+    },
+    {
+      "Id": "8",
+      "Name": "ItemName8",
+      "Resource": "item8",
+      "Type": "3",
+      "EffectId": "108"
+    },
+    {
+      "Id": "9",
+      "Name": "ItemName9",
+      "Resource": "item9",
+      "Type": "4",
+      "EffectId": "109"
+    },
+    {
+      "Id": "10",
+      "Name": "ItemName10",
+      "Resource": "item10",
+      "Type": "4",
+      "EffectId": "110"
+    },
+    {
+      "Id": "11",
+      "Name": "",
+      "Resource": "",
+      "Type": "",
+      "EffectId": ""
+    },
+    {
+      "Id": "12",
+      "Name": "",
+      "Resource": "",
+      "Type": "",
+      "EffectId": ""
+    },
+    {
+      "Id": "13",
+      "Name": "",
+      "Resource": "",
+      "Type": "",
+      "EffectId": ""
+    },
+    {
+      "Id": "14",
+      "Name": "",
+      "Resource": "",
+      "Type": "",
+      "EffectId": ""
+    },
+    {
+      "Id": "15",
+      "Name": "",
+      "Resource": "",
+      "Type": "",
+      "EffectId": ""
+    }
+  ]
+}

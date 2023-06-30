@@ -18,18 +18,16 @@ async function getSheetJson(sheet: string)
 	versionInfo[sheet] = json.Version;
 	console.log("load master:" + sheet);
 
-	fs.writeFileSync(`${sheet}.json`, text);
+	fs.writeFileSync(`json/${sheet}.json`, text);
 }
 
 async function getSheetJsonFromCache(sheet: string)
 {
-	const text = fs.readFileSync(`${sheet}.json`);
-        var json = JSON.parse(text);
-        mCache[sheet] = json.Data;
-        versionInfo[sheet] = json.Version;
-        console.log("load master:" + sheet);
-
-        fs.writeFileSync(`${sheet}.json`, text);
+	const text = fs.readFileSync(`json/${sheet}.json`);
+    var json = JSON.parse(text);
+    mCache[sheet] = json.Data;
+    versionInfo[sheet] = json.Version;
+    console.log("load master:" + sheet);
 };
 
 function createDicMaster(sheet: string)
@@ -53,18 +51,20 @@ export async function loadMaster()
 	await Promise.all(requests);
 
 	createDicMaster("Card");
+    createDicMaster("Quest");
 }
 
 export async function loadMasterFromCache()
 {
 	let requests = [];
-        for(let m of masterFiles)
-        {
-                requests.push(getSheetJsonFromCache(m));
-        }
-        await Promise.all(requests);
+    for(let m of masterFiles)
+    {
+            requests.push(getSheetJsonFromCache(m));
+    }
+    await Promise.all(requests);
 
-        createDicMaster("Card");
+    createDicMaster("Card");
+    createDicMaster("Quest");
 }
 
 

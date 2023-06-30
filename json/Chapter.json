@@ -1,0 +1,125 @@
+{
+  "Version": 45,
+  "Data": [
+    {
+      "Id": "1",
+      "Name": "ChapterName1",
+      "クエスト名": "チャプター1",
+      "Resource": "chapter1",
+      "QuestType": "0",
+      "Condition": "0"
+    },
+    {
+      "Id": "2",
+      "Name": "ChapterName2",
+      "クエスト名": "チャプター2",
+      "Resource": "chapter2",
+      "QuestType": "0",
+      "Condition": "0"
+    },
+    {
+      "Id": "3",
+      "Name": "ChapterName3",
+      "クエスト名": "チャプター3",
+      "Resource": "chapter3",
+      "QuestType": "0",
+      "Condition": "0"
+    },
+    {
+      "Id": "4",
+      "Name": "ChapterName4",
+      "クエスト名": "チャプター4",
+      "Resource": "chapter4",
+      "QuestType": "0",
+      "Condition": "0"
+    },
+    {
+      "Id": "5",
+      "Name": "",
+      "クエスト名": "",
+      "Resource": "",
+      "QuestType": "",
+      "Condition": ""
+    },
+    {
+      "Id": "6",
+      "Name": "",
+      "クエスト名": "",
+      "Resource": "",
+      "QuestType": "",
+      "Condition": ""
+    },
+    {
+      "Id": "7",
+      "Name": "",
+      "クエスト名": "",
+      "Resource": "",
+      "QuestType": "",
+      "Condition": ""
+    },
+    {
+      "Id": "8",
+      "Name": "",
+      "クエスト名": "",
+      "Resource": "",
+      "QuestType": "",
+      "Condition": ""
+    },
+    {
+      "Id": "9",
+      "Name": "",
+      "クエスト名": "",
+      "Resource": "",
+      "QuestType": "",
+      "Condition": ""
+    },
+    {
+      "Id": "10",
+      "Name": "",
+      "クエスト名": "",
+      "Resource": "",
+      "QuestType": "",
+      "Condition": ""
+    },
+    {
+      "Id": "11",
+      "Name": "",
+      "クエスト名": "",
+      "Resource": "",
+      "QuestType": "",
+      "Condition": ""
+    },
+    {
+      "Id": "12",
+      "Name": "",
+      "クエスト名": "",
+      "Resource": "",
+      "QuestType": "",
+      "Condition": ""
+    },
+    {
+      "Id": "13",
+      "Name": "",
+      "クエスト名": "",
+      "Resource": "",
+      "QuestType": "",
+      "Condition": ""
+    },
+    {
+      "Id": "14",
+      "Name": "",
+      "クエスト名": "",
+      "Resource": "",
+      "QuestType": "",
+      "Condition": ""
+    },
+    {
+      "Id": "15",
+      "Name": "",
+      "クエスト名": "",
+      "Resource": "",
+      "QuestType": "",
+      "Condition": ""
+    }
+  ]
+}
