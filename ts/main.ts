@@ -3,7 +3,7 @@ import { launch } from "./server"
 import { loadMaster, loadMasterFromCache } from "./lib/masterDataCache"
 
 (async function() {
-	await loadMaster();
-	//await loadMasterFromCache();
+	//await loadMaster();
+	await loadMasterFromCache();
 	launch();
 })();
