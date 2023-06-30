@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require('uuid')
 import { query } from "./../lib/database"
+//import { Card } from "./../model/card"
 import { getCache } from "./../lib/userCache"
 import { getMaster, getCard } from "./../lib/masterDataCache"
 
@@ -77,9 +78,7 @@ export function drawGachaSpecial(sheet: string)
 //重みづけ確率
 export async function draw(req: any,res: any,route: any)
 {
-	console.log(route.query.session);
 	let session = getCache(route.query.session);
-	console.log(session);
 	if(!session)
 	{
 	  console.log("err");
@@ -99,26 +98,28 @@ export async function draw(req: any,res: any,route: any)
 	//10以上は無い。この関数でテストはしない。
 	if(drawNum > 10) drawNum = 10;
 	
+	let resultCards = [];
 	for(let c=0; c<drawNum; ++c)
 	{
 		let id = drawGacha("Gacha");
-		drawIds.push(id);
+		
+		//ほんとは10個一気に送った方がいい
+		const result = await query("INSERT INTO UserCards(userId, cardId, level, luck) VALUES(?,?,1,1)",[session.userId, id]);
+		
+		console.log(result);
+		
+		resultCards.push({
+			id: Number(result.insertId),
+			cardId: id,
+			level: 1,
+			luck: 1
+		});
 	}
 	
-	/*
-	//保存
-	//
-	for(let c of drawIds)
-	{
-		const result = await query("INSERT INTO UserCards(userId, cardId, level) VALUES(?,?,1)",[session.userId, c]);
-		console.log(result);
-	}
-	//
-	*/
-	  console.log("here");
+	console.log("here");
 	return {
 		status: 200,
-		cardIds: drawIds
+		cardIds: resultCards
 	};
 }
 

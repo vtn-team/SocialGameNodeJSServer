@@ -20,21 +20,52 @@ export async function cards(req: any,res: any,route: any)
 	}
 	
 	//
-	const result = await query("SELECT id, cardId, level FROM UserCards WHERE userId = ?",[session.userId]);
-	let cards = [];
-	for(var c of result)
-	{
-		let card = {
-			id: Number(c.id),
-			cardId: c.cardId,
-			level: c.level
-		}
-		cards.push(card);
-	}
-	
+	const result = await query("SELECT * FROM UserCards WHERE userId = ?",[session.userId]);
 	return { 
 		status: 200,
 		version: Scheme.UserCards.Version,
-		cards: cards
+		cards: result
 	};
 }
+
+
+export async function items(req: any,res: any,route: any)
+{
+	let session = getCache(route.query.session);
+	
+	//user create
+	if(!session)
+	{
+	  return { status: 200 };
+	}
+	
+	//
+	const result = await query("SELECT * FROM UserItems WHERE userId = ?",[session.userId]);
+	
+	return { 
+		status: 200,
+		version: Scheme.UserItems.Version,
+		cards: result
+	};
+}
+
+export async function quests(req: any,res: any,route: any)
+{
+	let session = getCache(route.query.session);
+	
+	//user create
+	if(!session)
+	{
+	  return { status: 200 };
+	}
+	
+	//
+	const result = await query("SELECT * FROM UserQuests WHERE userId = ?",[session.userId]);
+	
+	return { 
+		status: 200,
+		version: Scheme.UserQuests.Version,
+		cards: result
+	};
+}
+

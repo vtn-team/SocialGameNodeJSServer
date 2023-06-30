@@ -29,14 +29,18 @@ export async function login(req: any,res: any,route: any)
 	//userIdをキャッシュに記録する
 	updateData(key, "userId", Number(result[0].id));
 	
-	return { 
-		status: 200,
-		session:key, 
-		token: session.token,
-		udid: result[0].udid,
-		name: result[0].name,
-		id: Number(result[0].id)
-	};
+	let ret:any = {};
+	for(var k in result[0])
+	{
+	  ret[k] = result[0][k];
+	}
+	
+	ret.status = 200;
+	ret.session = key;
+	ret.token = session.token;
+	ret.id = Number(result[0].id);
+	
+	return ret;
 }
 
 export async function create(req: any,res: any,route: any)

@@ -5,7 +5,7 @@ let mCache:any = {};
 let mDicCache:any = {};
 let versionInfo:any = {};
 
-let masterFiles = ["Card", "Effect", "Gacha", "GachaSpecial", "JP_Text", "EN_Text"];
+let masterFiles = ["Card", "Item", "Effect", "Chapter", "Quest","Gacha", "GachaSpecial", "JP_Text", "EN_Text"];
 const sheetUri = "https://script.google.com/macros/s/AKfycbw8Qkx1_NhgIm3TkqLqS5HWyEcQ2F44UdYxxBRpxk4ZIebrXyng-Y9ZgzfJ0sz3HwTpUA/exec";
 
 async function getSheetJson(sheet: string)
@@ -77,6 +77,12 @@ export function getCard(id: number)
 {
 	return mDicCache["Card"][id];
 }
+
+export function getQuest(id: number)
+{
+	return mDicCache["Quest"][id];
+}
+
 
 export function getVersionInfo()
 {

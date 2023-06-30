@@ -14,6 +14,8 @@ exports.Routes = {
 		},
 		"/ud" : {
 			"/cards" : "userdata#cards",
+			"/items" : "userdata#items",
+			"/quests" : "userdata#quests",
 		}
 	},
 	POST: {
@@ -25,6 +27,14 @@ exports.Routes = {
 		"/gacha" : {
 			"/draw" : "gacha#draw",
 			"/test" : "gacha#test"
+		},
+		"/enhance" : {
+			"/do" : "enhance#action"
+		},
+		"/quest" : {
+			"/start" : "quest#start",
+			"/result" : "quest#result",
+			"/continue" : "quest#continue_act"
 		}
 	}
 }
