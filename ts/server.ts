@@ -207,6 +207,7 @@ async function run(req: any, res: any, route: any) {
 		if(target != "login" && req.method == "POST") {
 			result.token = updateToken(route.query.session);
 		}
+		console.log(result);
 		if(!result) {
 			res.writeHead(200, {'Content-Type': 'text/html'});
 			res.write("run..." + route.action);
