@@ -2,6 +2,7 @@ const { v4: uuidv4 } = require('uuid')
 import { query } from "./../lib/database"
 import { getCache, updateCache } from "./../lib/userCache"
 import { getMaster, getQuest } from "./../lib/masterDataCache"
+import { calcPointHeal } from "./../contents/calcPointHeal"
 
 
 export async function index(req: any,res: any,route: any)
@@ -17,12 +18,6 @@ export async function start(req: any,res: any,route: any)
 	{
 	  return { status: 200 };
 	}
-
-	//user cache
-	if(!route.query.udid)
-	{
-	  return { status: 200 };
-	}
 	
 	let questId = route.query.questId;
 	const quest = getQuest(questId);
@@ -33,8 +28,10 @@ export async function start(req: any,res: any,route: any)
 	}
 	
 	//
-	const result = await query("SELECT * FROM User WHERE udid = ?",[route.query.udid]);
+	const result = await query("SELECT * FROM User WHERE id = ?",[session.userId]);
 	const user = result[0];
+	
+	calcPointHeal(user);
 	
 	if(user.movePoint < quest.MovePoint)
 	{
@@ -42,17 +39,18 @@ export async function start(req: any,res: any,route: any)
 	}
 	
 	let token:string = uuidv4();
-	await query("UPDATE User SET questTransaction = ?, movePoint = movePoint - ?, lastPointUpdate = now() WHERE udid = ?",[token, quest.MovePoint, route.query.udid]);
+	await query("UPDATE User SET questTransaction = ?, movePoint = ?, lastPointUpdate = now() WHERE id = ?",[token, (user.movePoint - quest.MovePoint), session.userId]);
 	
 	//サーバだけでする処理をここに書く＆Saveに記録するといい
 	
 	//
 	
 	//Questの状況をいちどQuestSaveに記録
-	await query("INSERT INTO QuestSave(udid, questId, userId) VALUES(?,?,?)", [token, questId, route.query.udid]);
+	await query("INSERT INTO QuestSave(udid, questId, userId) VALUES(?,?,?)", [token, questId, session.userId]);
 	
-	const result2 = await query("SELECT movePoint, lastPointUpdate FROM User WHERE udid = ?",[route.query.udid]);
+	const result2 = await query("SELECT movePoint, lastPointUpdate FROM User WHERE id = ?",[session.userId]);
 	const user2 = result2[0];
+	console.log(user2);
 	
 	return { 
 		status: 200,
@@ -77,7 +75,7 @@ export async function result(req: any,res: any,route: any)
 	
 	//TODO: クエスト成功報酬を渡す or ポイントを戻す
 	
-	const result = await query("DELETE FROM QuestSave WHERE udid = ?",[transaction]);
+	await query("DELETE FROM QuestSave WHERE udid = ?",[transaction]);
 	
 	return { 
 		status: 200,

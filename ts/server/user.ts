@@ -1,6 +1,7 @@
 const { v4: uuidv4 } = require('uuid')
 import { query } from "./../lib/database"
 import { getCache, updateCache, updateData } from "./../lib/userCache"
+import { calcPointHeal } from "./../contents/calcPointHeal"
 
 export async function index(req: any,res: any,route: any)
 {
@@ -23,8 +24,14 @@ export async function login(req: any,res: any,route: any)
 	const result = await query("SELECT * FROM User WHERE udid = ?",[route.query.udid]);
 	if(result.length == 0)
 	{
-	  return { status: 400 };
+	  //TODO: テストでDB移行すると400になり進行不能になるため、ここではユーザが登録されていない処理とする
+	  return { status: 200, session:key, token: session.token };
+	  
+	  //return { status: 400 };
 	}
+	
+	//回復
+	calcPointHeal(result[0]);
 	
 	//userIdをキャッシュに記録する
 	updateData(key, "userId", Number(result[0].id));
@@ -39,6 +46,7 @@ export async function login(req: any,res: any,route: any)
 	ret.session = key;
 	ret.token = session.token;
 	ret.id = Number(result[0].id);
+	ret.lastPointUpdate = new Date(result[0].lastPointUpdate).getTime();
 	
 	return ret;
 }
@@ -48,9 +56,14 @@ export async function create(req: any,res: any,route: any)
 	let index = 0;
 	if(!route.query.name) return {};
 	
+	//ユーザ作る
 	let udid:string = uuidv4();
 	const result = await query("INSERT INTO User(udid, name) VALUES(?,?)",[udid, route.query.name]);
-	console.log(result);
+	
+	//その他必要なものを付与する
+	
+	//
+	
 	return {
 		status: 200,
 		udid: udid,

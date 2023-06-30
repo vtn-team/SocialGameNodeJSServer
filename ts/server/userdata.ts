@@ -45,7 +45,7 @@ export async function items(req: any,res: any,route: any)
 	return { 
 		status: 200,
 		version: Scheme.UserItems.Version,
-		cards: result
+		items: result
 	};
 }
 
@@ -65,7 +65,7 @@ export async function quests(req: any,res: any,route: any)
 	return { 
 		status: 200,
 		version: Scheme.UserQuests.Version,
-		cards: result
+		quests: result
 	};
 }
 
