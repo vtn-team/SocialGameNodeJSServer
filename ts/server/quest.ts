@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid')
 import { query } from "./../lib/database"
-import { getCache, updateCache } from "./../lib/userCache"
+import { getCache } from "./../lib/userCache"
 import { getMaster, getQuest, getQuestRewards } from "./../lib/masterDataCache"
 import { calcPointHeal } from "./../contents/calcPointHeal"
 import { addReward } from "./../contents/addReward"
@@ -14,7 +14,7 @@ export async function index(req: any,res: any,route: any)
 
 export async function start(req: any,res: any,route: any)
 {
-	let session = getCache(route.query.session);
+	let session = await getCache(route.query.session);
 	if(!session)
 	{
 	  return { status: 200 };
@@ -64,7 +64,7 @@ export async function start(req: any,res: any,route: any)
 
 export async function result(req: any,res: any,route: any)
 {
-	let session = getCache(route.query.session);
+	let session = await getCache(route.query.session);
 	if(!session)
 	{
 		return { status: 200 };
@@ -113,7 +113,7 @@ export async function result(req: any,res: any,route: any)
 
 export async function continue_act(req: any,res: any,route: any)
 {
-	let session = getCache(route.query.session);
+	let session = await getCache(route.query.session);
 	if(!session)
 	{
 	  return { status: 200 };

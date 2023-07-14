@@ -1,5 +1,5 @@
 import { query } from "./../lib/database"
-import { getCache, updateCache } from "./../lib/userCache"
+import { getCache } from "./../lib/userCache"
 
 export async function index(req: any,res: any,route: any)
 {
@@ -11,9 +11,8 @@ export async function index(req: any,res: any,route: any)
 //ただしここのファイルで書くうえでは特にGETとPOSTに差分はない
 export async function getReq(req: any,res: any,route: any)
 {
-	let session = getCache(route.query.session);
-	
-	//user create
+	//ユーザ情報はsessionの中に全部入ってる
+	let session = await getCache(route.query.session);
 	if(!session)
 	{
 	  return { status: 200 };
@@ -34,7 +33,8 @@ export async function getReq(req: any,res: any,route: any)
 //POSTの場合はtokenが更新される
 export async function postReq(req: any,res: any,route: any)
 {
-	let session = getCache(route.query.session);
+	//ユーザ情報はsessionの中に全部入ってる
+	let session = await getCache(route.query.session);
 	if(!session)
 	{
 		return { status: 200 };

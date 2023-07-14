@@ -11,8 +11,8 @@ export async function index(req: any,res: any,route: any)
 
 export async function login(req: any,res: any,route: any)
 {
-	let key = updateCache(route.query.udid);
-	let session = getCache(key);
+	let key = await updateCache(route.query.udid);
+	let session = await getCache(key);
 
 	//user cache
 	if(!route.query.udid)
@@ -34,7 +34,7 @@ export async function login(req: any,res: any,route: any)
 	calcPointHeal(result[0]);
 	
 	//userIdをキャッシュに記録する
-	updateData(key, "userId", Number(result[0].id));
+	await updateData(key, "userId", Number(result[0].id));
 	
 	let ret:any = {};
 	for(var k in result[0])

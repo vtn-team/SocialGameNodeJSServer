@@ -78,7 +78,7 @@ export function drawGachaSpecial(sheet: string)
 //重みづけ確率
 export async function draw(req: any,res: any,route: any)
 {
-	let session = getCache(route.query.session);
+	let session = await getCache(route.query.session);
 	if(!session)
 	{
 	  console.log("err");

@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid')
 import { query } from "./../lib/database"
-import { getCache, updateCache } from "./../lib/userCache"
+import { getCache } from "./../lib/userCache"
 const Scheme = require("./../dbScheme").Scheme;
 
 export async function index(req: any,res: any,route: any)
@@ -11,7 +11,7 @@ export async function index(req: any,res: any,route: any)
 
 export async function action(req: any,res: any,route: any)
 {
-	let session = getCache(route.query.session);
+	let session = await getCache(route.query.session);
 	
 	//user create
 	if(!session)

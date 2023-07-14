@@ -182,7 +182,7 @@ async function run(req: any, res: any, route: any) {
 		//session check
 		if(route.auth)
 		{
-			route.session = getCache(route.query.session);
+			route.session = await getCache(route.query.session);
 			console.log(route.session);
 			if(target != "login" && !route.session) {
 				res.writeHead(503, {'Content-Type': 'text/html'});
@@ -205,7 +205,7 @@ async function run(req: any, res: any, route: any) {
 		let result = await apiScript[target](req,res,route);
 		//POSTの場合重複送信を避けるためtokenを更新
 		if(target != "login" && req.method == "POST") {
-			result.token = updateToken(route.query.session);
+			result.token = await updateToken(route.query.session);
 		}
 		console.log(result);
 		if(!result) {
