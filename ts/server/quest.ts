@@ -1,8 +1,9 @@
 const { v4: uuidv4 } = require('uuid')
 import { query } from "./../lib/database"
 import { getCache, updateCache } from "./../lib/userCache"
-import { getMaster, getQuest } from "./../lib/masterDataCache"
+import { getMaster, getQuest, getQuestRewards } from "./../lib/masterDataCache"
 import { calcPointHeal } from "./../contents/calcPointHeal"
+import { addReward } from "./../contents/addReward"
 
 
 export async function index(req: any,res: any,route: any)
@@ -41,8 +42,8 @@ export async function start(req: any,res: any,route: any)
 	let token:string = uuidv4();
 	await query("UPDATE User SET questTransaction = ?, movePoint = ?, lastPointUpdate = now() WHERE id = ?",[token, (user.movePoint - quest.MovePoint), session.userId]);
 	
-	//サーバだけでする処理をここに書く＆Saveに記録するといい
-	
+	//サーバだけでする処理をここに書く＆Saveに記録する
+	//TODO: サンプルではインゲームがないので敵やステージデータなどの情報は生成しない
 	//
 	
 	//Questの状況をいちどQuestSaveに記録
@@ -54,7 +55,7 @@ export async function start(req: any,res: any,route: any)
 	
 	return { 
 		status: 200,
-		transaction: token,
+		transactionId: token,
 		afterMovePoint: user2.movePoint,
 		lastPointUpdate: (new Date(user2.lastPointUpdate)).getTime(),
 		enemies: [], //TODO: 実際は出現する敵を返す
@@ -66,20 +67,47 @@ export async function result(req: any,res: any,route: any)
 	let session = getCache(route.query.session);
 	if(!session)
 	{
-	  return { status: 200 };
+		return { status: 200 };
 	}
 	
-	let transaction = route.query.transaction;
+	let transactionId = route.query.transactionId;
 	
-	const result = await query("SELECT * FROM QuestSave WHERE udid = ?",[transaction]);
+	const result = await query("SELECT * FROM QuestSave WHERE udid = ?",[transactionId]);
+	if(result.length == 0)
+	{
+		//クエストデータが見つからないエラー
+		return { status: 404 };
+	}
 	
-	//TODO: クエスト成功報酬を渡す or ポイントを戻す
+	//単一レコードである
+	let questSave = result[0];
 	
-	await query("DELETE FROM QuestSave WHERE udid = ?",[transaction]);
+	//クエスト成功報酬を渡す
+	let quest = getQuest(questSave.questId);
+	let rewards = getQuestRewards(quest.QuestRewardGroupd);
+	console.log(rewards);
+	let rewardInfo = [];
+	for(let d of rewards)
+	{
+		let rewardData = await addReward(questSave.userId, d.RewardGroupId)
+		console.log(rewardData);
+		let retVal = [];
+		for(let d of rewardData.retVal)
+		{
+			retVal.push(String(d));
+		}
+		
+		rewardInfo.push({
+			type: rewardData.type,
+			param: retVal
+		});
+	}
+	
+	await query("DELETE FROM QuestSave WHERE udid = ?",[transactionId]);
 	
 	return { 
 		status: 200,
-		rewards: [], //TODO: 実際は入手したアイテム等を返す
+		rewards: rewardInfo, //TODO: 実際は入手したアイテム等を返す
 	};
 }
 
