@@ -20,7 +20,7 @@ export function drawGacha(sheet: string)
 	for(var d of master)
 	{
 		if(d.Probability == "") continue;
-		total += parseInt(d.Probability);
+		total += d.Probability;
 	}
 	
 	let get = null;
@@ -28,10 +28,10 @@ export function drawGacha(sheet: string)
 	for(var d of master)
 	{
 		if(d.Probability == "") continue;
-		random -= parseInt(d.Probability);
+		random -= d.Probability;
 		if(random < 0)
 		{
-			get = parseInt(d.Id);
+			get = d.Id;
 			break;
 		}
 	}
@@ -51,7 +51,7 @@ export function drawGachaSpecial(sheet: string)
 		var c = getCard(d.Id);
 		if(c.Rare <= 3) continue;
 		
-		total += parseInt(d.Probability);
+		total += d.Probability;
 	}
 	
 	let get = null;
@@ -63,10 +63,10 @@ export function drawGachaSpecial(sheet: string)
 		var c = getCard(d.Id);
 		if(c.Rare <= 3) continue;
 		
-		random -= parseInt(d.Probability);
+		random -= d.Probability;
 		if(random < 0)
 		{
-			get = parseInt(d.Id);
+			get = d.Id;
 			break;
 		}
 	}

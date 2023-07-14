@@ -81,6 +81,20 @@ export async function loadMasterFromCache()
 //索引用の辞書配列を作る
 function constructDicMaster()
 {
+	//文字列になっている数字をNumberに成型する
+	for(let mKey in mCache)
+	{
+		for(let d of mCache[mKey])
+		{
+			for(let k in d)
+			{
+				if(!isNaN(parseInt(d[k])))
+				{
+					d[k] = parseInt(d[k]);
+				}
+			}
+		}
+	}
 	
 	createDicMaster("Card");
 	createDicMaster("Item");
