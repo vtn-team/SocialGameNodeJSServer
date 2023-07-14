@@ -1,0 +1,13 @@
+{
+  "Version": 59,
+  "Data": [
+    {
+      "Id": "1",
+      "Name": "EventTitle1",
+      "Resource": "Event1",
+      "StartAt": "Wed Jul 12 2023 00:00:00 GMT+0900 (日本標準時)",
+      "GameEndAt": "Sat Jul 29 2023 00:00:00 GMT+0900 (日本標準時)",
+      "EndAt": "Mon Jul 31 2023 00:00:00 GMT+0900 (日本標準時)"
+    }
+  ]
+}

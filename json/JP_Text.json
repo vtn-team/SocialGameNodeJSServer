@@ -1,5 +1,5 @@
 {
-  "Version": 135,
+  "Version": 192,
   "Data": [
     {
       "Key": "CardName1",
@@ -150,6 +150,22 @@
       "Text": ""
     },
     {
+      "Key": "EventChapter1",
+      "Text": "イベント1"
+    },
+    {
+      "Key": "EventChapter2",
+      "Text": "イベント2"
+    },
+    {
+      "Key": "EventChapter3",
+      "Text": "イベント3"
+    },
+    {
+      "Key": "",
+      "Text": ""
+    },
+    {
       "Key": "QuestName1",
       "Text": "クエスト1"
     },
@@ -202,6 +218,54 @@
       "Text": ""
     },
     {
+      "Key": "EventQuestName1",
+      "Text": "イベクエ1"
+    },
+    {
+      "Key": "EventQuestName2",
+      "Text": "イベクエ2"
+    },
+    {
+      "Key": "EventQuestName3",
+      "Text": "イベクエ3"
+    },
+    {
+      "Key": "EventQuestName4",
+      "Text": "イベクエ4"
+    },
+    {
+      "Key": "EventQuestName5",
+      "Text": "イベクエ5"
+    },
+    {
+      "Key": "EventQuestName6",
+      "Text": "イベクエ6"
+    },
+    {
+      "Key": "EventQuestName7",
+      "Text": "イベクエ7"
+    },
+    {
+      "Key": "EventQuestName8",
+      "Text": "イベクエ8"
+    },
+    {
+      "Key": "EventQuestName9",
+      "Text": "イベクエ9"
+    },
+    {
+      "Key": "",
+      "Text": ""
+    },
+    {
+      "Key": "EventTitle1",
+      "Text": "夏の夜の夢"
+    },
+    {
+      "Key": "",
+      "Text": ""
+    },
+    {
       "Key": "UIBack",
       "Text": "戻る"
     },
@@ -227,11 +291,11 @@
     },
     {
       "Key": "UIQuest",
-      "Text": ""
+      "Text": "クエスト"
     },
     {
       "Key": "UIFriend",
-      "Text": ""
+      "Text": "フレンド"
     },
     {
       "Key": "",
@@ -296,6 +360,34 @@
     {
       "Key": "UINoQuest",
       "Text": "やめる"
+    },
+    {
+      "Key": "",
+      "Text": ""
+    },
+    {
+      "Key": "UIEvent",
+      "Text": "イベント"
+    },
+    {
+      "Key": "UIEventQuest",
+      "Text": "イベントクエストへ"
+    },
+    {
+      "Key": "UIRanking",
+      "Text": "ランキングへ"
+    },
+    {
+      "Key": "UIEventHome",
+      "Text": "イベントホームへ"
+    },
+    {
+      "Key": "UIYourRank",
+      "Text": "あなたの順位"
+    },
+    {
+      "Key": "UIRank",
+      "Text": "位"
     }
   ]
 }

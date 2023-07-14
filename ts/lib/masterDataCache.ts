@@ -5,7 +5,7 @@ let mCache:any = {};
 let mDicCache:any = {};
 let versionInfo:any = {};
 
-let masterFiles = ["Card", "Item", "Effect", "Chapter", "Quest","Gacha", "GachaSpecial", "JP_Text", "EN_Text"];
+let masterFiles = ["Card", "Item", "Effect", "Event", "Chapter", "Quest","QuestRewards","Rewards","Gacha", "GachaSpecial", "JP_Text", "EN_Text"];
 const sheetUri = "https://script.google.com/macros/s/AKfycbw8Qkx1_NhgIm3TkqLqS5HWyEcQ2F44UdYxxBRpxk4ZIebrXyng-Y9ZgzfJ0sz3HwTpUA/exec";
 
 async function getSheetJson(sheet: string)
@@ -28,16 +28,31 @@ async function getSheetJsonFromCache(sheet: string)
     mCache[sheet] = json.Data;
     versionInfo[sheet] = json.Version;
     console.log("load master:" + sheet);
-};
+}
 
-function createDicMaster(sheet: string)
+//IDをキーにした辞書配列にする
+function createDicMaster(sheet: string, keyString: string = "Id")
 {
 	mDicCache[sheet] = {};
 	
 	var master = getMaster(sheet);
 	for(let d of master)
 	{
-		mDicCache[sheet][parseInt(d.Id)] = d;
+		mDicCache[sheet][d[keyString]] = d;
+	}
+}
+
+//特定のIDをキーにした辞書配列にし、同じキーを持つレコードをまとめて配列で返す
+function createDicGroupListMaster(sheet: string, keyString: string = "Id")
+{
+	mDicCache[sheet] = {};
+	
+	var master = getMaster(sheet);
+	for(let d of master)
+	{
+		if(mDicCache[sheet][d[keyString]] == undefined) mDicCache[sheet][d[keyString]] = [];
+		
+		mDicCache[sheet][d[keyString]].push(d);
 	}
 }
 
@@ -49,9 +64,7 @@ export async function loadMaster()
 		requests.push(getSheetJson(m));
 	}
 	await Promise.all(requests);
-
-	createDicMaster("Card");
-    createDicMaster("Quest");
+	constructDicMaster();
 }
 
 export async function loadMasterFromCache()
@@ -62,9 +75,18 @@ export async function loadMasterFromCache()
             requests.push(getSheetJsonFromCache(m));
     }
     await Promise.all(requests);
+	constructDicMaster();
+}
 
-    createDicMaster("Card");
-    createDicMaster("Quest");
+//索引用の辞書配列を作る
+function constructDicMaster()
+{
+	
+	createDicMaster("Card");
+	createDicMaster("Item");
+	createDicMaster("Quest");
+	createDicGroupListMaster("QuestRewards", "GroupId");
+	createDicGroupListMaster("Rewards", "GroupId");
 }
 
 
@@ -78,9 +100,24 @@ export function getCard(id: number)
 	return mDicCache["Card"][id];
 }
 
+export function getItem(id: number)
+{
+	return mDicCache["Item"][id];
+}
+
 export function getQuest(id: number)
 {
 	return mDicCache["Quest"][id];
+}
+
+export function getQuestRewards(id: number)
+{
+	return mDicCache["QuestRewards"][id];
+}
+
+export function getRewards(id: number)
+{
+	return mDicCache["Rewards"][id];
 }
 
 

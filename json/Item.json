@@ -1,5 +1,5 @@
 {
-  "Version": 28,
+  "Version": 39,
   "Data": [
     {
       "Id": "1",
@@ -70,41 +70,6 @@
       "Resource": "item10",
       "Type": "4",
       "EffectId": "110"
-    },
-    {
-      "Id": "11",
-      "Name": "",
-      "Resource": "",
-      "Type": "",
-      "EffectId": ""
-    },
-    {
-      "Id": "12",
-      "Name": "",
-      "Resource": "",
-      "Type": "",
-      "EffectId": ""
-    },
-    {
-      "Id": "13",
-      "Name": "",
-      "Resource": "",
-      "Type": "",
-      "EffectId": ""
-    },
-    {
-      "Id": "14",
-      "Name": "",
-      "Resource": "",
-      "Type": "",
-      "EffectId": ""
-    },
-    {
-      "Id": "15",
-      "Name": "",
-      "Resource": "",
-      "Type": "",
-      "EffectId": ""
     }
   ]
 }

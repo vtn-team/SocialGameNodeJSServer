@@ -1,10 +1,9 @@
 {
-  "Version": 45,
+  "Version": 68,
   "Data": [
     {
       "Id": "1",
       "Name": "ChapterName1",
-      "クエスト名": "チャプター1",
       "Resource": "chapter1",
       "QuestType": "0",
       "Condition": "0"
@@ -12,114 +11,44 @@
     {
       "Id": "2",
       "Name": "ChapterName2",
-      "クエスト名": "チャプター2",
       "Resource": "chapter2",
       "QuestType": "0",
-      "Condition": "0"
+      "Condition": "1"
     },
     {
       "Id": "3",
       "Name": "ChapterName3",
-      "クエスト名": "チャプター3",
       "Resource": "chapter3",
       "QuestType": "0",
-      "Condition": "0"
+      "Condition": "2"
     },
     {
       "Id": "4",
       "Name": "ChapterName4",
-      "クエスト名": "チャプター4",
       "Resource": "chapter4",
       "QuestType": "0",
-      "Condition": "0"
+      "Condition": "3"
     },
     {
-      "Id": "5",
-      "Name": "",
-      "クエスト名": "",
-      "Resource": "",
-      "QuestType": "",
-      "Condition": ""
+      "Id": "101",
+      "Name": "EventChapter1",
+      "Resource": "event1",
+      "QuestType": "1",
+      "Condition": "1"
     },
     {
-      "Id": "6",
-      "Name": "",
-      "クエスト名": "",
-      "Resource": "",
-      "QuestType": "",
-      "Condition": ""
+      "Id": "102",
+      "Name": "EventChapter2",
+      "Resource": "event2",
+      "QuestType": "1",
+      "Condition": "2"
     },
     {
-      "Id": "7",
-      "Name": "",
-      "クエスト名": "",
-      "Resource": "",
-      "QuestType": "",
-      "Condition": ""
-    },
-    {
-      "Id": "8",
-      "Name": "",
-      "クエスト名": "",
-      "Resource": "",
-      "QuestType": "",
-      "Condition": ""
-    },
-    {
-      "Id": "9",
-      "Name": "",
-      "クエスト名": "",
-      "Resource": "",
-      "QuestType": "",
-      "Condition": ""
-    },
-    {
-      "Id": "10",
-      "Name": "",
-      "クエスト名": "",
-      "Resource": "",
-      "QuestType": "",
-      "Condition": ""
-    },
-    {
-      "Id": "11",
-      "Name": "",
-      "クエスト名": "",
-      "Resource": "",
-      "QuestType": "",
-      "Condition": ""
-    },
-    {
-      "Id": "12",
-      "Name": "",
-      "クエスト名": "",
-      "Resource": "",
-      "QuestType": "",
-      "Condition": ""
-    },
-    {
-      "Id": "13",
-      "Name": "",
-      "クエスト名": "",
-      "Resource": "",
-      "QuestType": "",
-      "Condition": ""
-    },
-    {
-      "Id": "14",
-      "Name": "",
-      "クエスト名": "",
-      "Resource": "",
-      "QuestType": "",
-      "Condition": ""
-    },
-    {
-      "Id": "15",
-      "Name": "",
-      "クエスト名": "",
-      "Resource": "",
-      "QuestType": "",
-      "Condition": ""
+      "Id": "103",
+      "Name": "EventChapter3",
+      "Resource": "event3",
+      "QuestType": "1",
+      "Condition": "3"
     }
   ]
 }
