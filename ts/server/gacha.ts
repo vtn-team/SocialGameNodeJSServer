@@ -119,7 +119,7 @@ export async function draw(req: any,res: any,route: any)
 	console.log("here");
 	return {
 		status: 200,
-		cardIds: resultCards
+		cards: resultCards
 	};
 }
 
