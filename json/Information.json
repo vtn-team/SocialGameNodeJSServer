@@ -1,0 +1,40 @@
+{
+  "7f9f9836-261c-4f1d-8703-cb3d98cf245e": {
+    "id": "7f9f9836-261c-4f1d-8703-cb3d98cf245e",
+    "title": "お知らせテスト2",
+    "contents": [
+      {
+        "type": "InfoText",
+        "param": [
+          "はいしんてすと2\n"
+        ]
+      }
+    ]
+  },
+  "acdd0acc-e712-4621-8ece-b0f0a049f137": {
+    "id": "acdd0acc-e712-4621-8ece-b0f0a049f137",
+    "title": "お知らせテスト",
+    "contents": [
+      {
+        "type": "InfoText",
+        "param": [
+          "中身が配信されます\n"
+        ]
+      },
+      {
+        "type": "InfoSpacer",
+        "param": []
+      },
+      {
+        "type": "InfoText",
+        "param": [
+          "<color=\"red\">{%PlayerName}の能力が強化</color>されます。\n"
+        ]
+      },
+      {
+        "type": "InfoSpacer",
+        "param": []
+      }
+    ]
+  }
+}
