@@ -1,10 +1,17 @@
+import { query } from "./../lib/database"
 
-//TODO: イベントポイント
-export function addEventPoint(userId: number, baeePoint: number, randomPoint: number)
+export async function addEventPoint(userId: number, baeePoint: number, randomPoint: number)
 {
 	try
 	{
-		//NOTE: userModelのaddMoneyを参考にするとよい
+		let addAmount = baeePoint + Math.floor(Math.random() * randomPoint);
+		let result = await query("UPDATE RankingPoint SET point = point + ? WHERE userId = ?",[addAmount, userId]);
+		
+		//キャッシュの更新が必要ならそうする
+		//
+		
+		//
+		return [addAmount];
 	}
 	catch(ex)
 	{

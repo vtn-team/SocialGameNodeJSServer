@@ -20,6 +20,10 @@ exports.Routes = {
 		"/info" : {
 			"/list" : "info#list",
 			"@id%s"   : "info#getInfo",
+		},
+		"/event" : {
+			"/stat" : "event#stat",
+			"/ranking" : "event#ranking",
 		}
 	},
 	POST: {
