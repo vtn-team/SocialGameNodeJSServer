@@ -2,6 +2,7 @@ import { getMaster, getCard, getItem, getRewards } from "./../lib/masterDataCach
 import { addItem } from "./itemModel"
 import { addCard } from "./cardModel"
 import { addMoney } from "./userModel"
+import { addEventPoint } from "./eventModel"
 
 export enum ItemType {
 	None = 0,
@@ -51,8 +52,8 @@ export async function addReward(userId: number, rewardGroupId: number)
 		case ItemType.Money: result.retVal = await addMoney(userId, get.RewardParam1, get.RewardParam2); break;
 		case ItemType.Item: result.retVal = await addItem(userId, get.RewardParam1, get.RewardParam2); break;
 		
-		//TODO: イベント処理
-		//case ItemType.EventPoint: result.retVal = await addEventPoint(userId, get.RewardParam1, get.RewardParam2); break;
+		//イベント処理
+		case ItemType.EventPoint: result.retVal = await addEventPoint(userId, get.RewardParam1, get.RewardParam2); break;
 		}
 		
 		return result;

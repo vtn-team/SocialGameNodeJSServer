@@ -88,6 +88,8 @@ function constructDicMaster()
 		{
 			for(let k in d)
 			{
+				if(k.endsWith("At")) continue;
+				
 				if(!isNaN(parseInt(d[k])))
 				{
 					d[k] = parseInt(d[k]);
@@ -97,6 +99,7 @@ function constructDicMaster()
 	}
 	
 	createDicMaster("Card");
+	createDicMaster("Event");
 	createDicMaster("Item");
 	createDicMaster("Quest");
 	createDicGroupListMaster("QuestRewards", "GroupId");
@@ -132,6 +135,11 @@ export function getQuestRewards(id: number)
 export function getRewards(id: number)
 {
 	return mDicCache["Rewards"][id];
+}
+
+export function getEvent(id: number)
+{
+	return mDicCache["Event"][id];
 }
 
 
