@@ -36,6 +36,7 @@ export async function stat(req: any,res: any,route: any)
 	if(result.length == 0)
 	{
 		await query("INSERT INTO RankingEvent(userId) VALUES (?)",[session.userId]);
+		result = await query("SELECT point FROM RankingEvent WHERE userId = ?",[session.userId]);
 	}
 	
 	const point = result[0].point;
