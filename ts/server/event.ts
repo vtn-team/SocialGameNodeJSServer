@@ -30,7 +30,7 @@ export async function stat(req: any,res: any,route: any)
 	const event = getEvent(eventId);
 	
 	//イベントテーブルを取得してくる
-	const result = await query("SELECT point FROM RankingEvent WHERE userId = ?",[session.userId]);
+	let result = await query("SELECT point FROM RankingEvent WHERE userId = ?",[session.userId]);
 	
 	//レコードが無かったら作る
 	if(result.length == 0)
