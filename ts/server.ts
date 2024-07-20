@@ -293,7 +293,7 @@ export function launch() {
 			return ;
 		}
 		await run(req,res,route);
-	}).listen('4649', '127.0.0.1');
+	}).listen('80', '0.0.0.0');
 
 	app.on('uncaughtException', function(err: any) {
 		console.log("Caught exception: " + err);
