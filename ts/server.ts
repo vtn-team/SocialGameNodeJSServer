@@ -2,6 +2,7 @@ const http = require('http');
 const qs = require('querystring');
 const Routes = require('./apiRoute').Routes;
 const Auth = require('./apiRoute').Auth;
+import { SERVER_URI, SERVER_PORT } from './env';
 import { getCache, updateToken } from "./lib/userCache"
 
 function check(method: string, url: string)
@@ -293,7 +294,7 @@ export function launch() {
 			return ;
 		}
 		await run(req,res,route);
-	}).listen('80', '0.0.0.0');
+	}).listen(SERVER_PORT, SERVER_URI);
 
 	app.on('uncaughtException', function(err: any) {
 		console.log("Caught exception: " + err);
