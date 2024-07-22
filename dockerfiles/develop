@@ -1,0 +1,19 @@
+FROM node:20-bullseye-slim 
+
+WORKDIR /app
+COPY . /app/apiServer/
+
+WORKDIR /app/apiServer
+RUN npm ci
+RUN npx tsc
+
+# Add Tini
+ENV TINI_VERSION v0.19.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
+
+ENTRYPOINT ["/tini", "--"]
+
+EXPOSE 80
+
+CMD ["node", "/app/apiServer/js/main.js"]
