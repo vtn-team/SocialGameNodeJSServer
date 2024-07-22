@@ -2,10 +2,15 @@
 
 let uriDic:any = {};
 
-export const MARIADB_URI = uriDic["MariaDB"];
-export const REDIS_URI = uriDic["Redis"];
-export const SERVER_URI = uriDic["Server"];
-export const SERVER_PORT = uriDic["ServerPort"];
+function getDicIntValue(key: string) : number {
+console.log(uriDic[key])
+	return uriDic[key];
+}
+
+function getDicStringValue(key: string) : string {
+	console.log(uriDic[key])
+	return uriDic[key];
+}
 
 
 (()=>{
@@ -22,8 +27,13 @@ export const SERVER_PORT = uriDic["ServerPort"];
 	default:
 		uriDic["Redis"] = "redis://redis:6379/0";
 		uriDic["Server"] = "0.0.0.0";
-		uriDic["ServerPort"] = "80";
+		uriDic["ServerPort"] = "8080";
 		console.log("setup uri container");
 		break;
 	}
 })();
+
+export const MARIADB_URI = getDicStringValue("MariaDB");
+export const REDIS_URI = getDicStringValue("Redis");
+export const SERVER_URI = getDicStringValue("Server");
+export const SERVER_PORT = getDicIntValue("ServerPort");
