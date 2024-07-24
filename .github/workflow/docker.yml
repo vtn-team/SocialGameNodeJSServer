@@ -18,7 +18,7 @@ jobs:
       - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-region: "ap-northeast"
-          role-to-assume: ${{ secrets.AWS_ECR_PUSH_ARN }}
+          role-to-assume: ${{ vars.AWS_ECR_PUSH_ARN }}
 
       # ECR ログイン
       - uses: aws-actions/amazon-ecr-login@v1
@@ -31,7 +31,7 @@ jobs:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
 
           # イメージを push する ECR リポジトリ名
-          REPOSITORY: ${{ secrets.AWS_ECR_REPO_NAME }}
+          REPOSITORY: ${{ vars.AWS_ECR_REPO_NAME }}
           
           # 任意のイメージタグ
           # 今回は Git のコミットハッシュにしておく
