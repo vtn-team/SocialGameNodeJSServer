@@ -27,7 +27,7 @@ function getDicStringValue(key: string) : string {
 	default:
 		uriDic["Redis"] = "redis://redis:6379/0";
 		uriDic["Server"] = "0.0.0.0";
-		uriDic["ServerPort"] = "8080";
+		uriDic["ServerPort"] = "80";
 		console.log("setup uri container");
 		break;
 	}
