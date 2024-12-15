@@ -204,7 +204,7 @@ async function run(req: any, res: any, route: any) {
 		
 		let result = await apiScript[target](req,res,route);
 		//POSTの場合重複送信を避けるためtokenを更新
-		if(target != "login" && req.method == "POST") {
+		if(target != "login" && req.method == "POST" && route.auth) {
 			result.token = await updateToken(route.query.session);
 		}
 		console.log(result);
@@ -266,13 +266,14 @@ export function launch() {
 				//end of data
 				var isParsed = false;
 				try {
-					let d = JSON.parse(decodeURIComponent(data));
+					console.log(data);
+					let d = JSON.parse(data);
 					for(var k in d) {
 						route.query[k] = d[k];
 					}
 					isParsed = true;
 				}catch(ex){
-					
+					console.log(ex);
 				}
 				
 				if(!isParsed){
@@ -283,7 +284,7 @@ export function launch() {
 						}
 						isParsed = true;
 					}catch(ex){
-						
+						console.log(ex);
 					}
 				}
 				

@@ -4,10 +4,10 @@ import { loadMaster, loadMasterFromCache } from "./lib/masterDataCache"
 import { loadInformation, loadInformationFromCache } from "./lib/InformationCache"
 
 (async function() {
-	//await loadMaster();
+	await loadMaster();
 	//await loadInformation();
 	
-	await loadMasterFromCache();
+	//await loadMasterFromCache();
 	await loadInformationFromCache();
 	launch();
 })();
