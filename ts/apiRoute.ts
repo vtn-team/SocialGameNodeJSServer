@@ -40,7 +40,8 @@ exports.Routes = {
 		},
 		"/vc" : {
 			"/stat" : "vc#stat",
-			"/getaddr" : "vc#getaddr"
+			"/getaddr" : "vc#getaddr",
+			"/masterupdate" : "vc#masterupdate"
 		}
 	},
 	POST: {

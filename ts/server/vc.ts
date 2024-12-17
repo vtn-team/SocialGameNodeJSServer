@@ -1,4 +1,4 @@
-import { getConnectionAddress, getActiveSessionNum } from "./../gameserver/server"
+import { getConnectionAddress, getActiveSessionNum, reloadMaster } from "./../gameserver/server"
 
 export async function index(req: any,res: any,route: any)
 {
@@ -34,3 +34,14 @@ export async function stat(req: any,res: any,route: any)
 		activeNum: getActiveSessionNum(),
 	};
 }
+
+export async function masterupdate(req: any,res: any,route: any)
+{
+	//async
+	reloadMaster();
+	
+	return {
+		status: 200
+	};
+}
+

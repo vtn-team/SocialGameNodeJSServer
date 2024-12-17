@@ -77,6 +77,7 @@ class Server {
 		this.sessions = {};
 		this.server = new WebSocketServer({ port });
 		this.contents = new VantanConnect((data: any)=>{ this.broadcast(data); });
+		this.contents.setupData();
 		this.lastActiveNum = 0;
 		this.server.on ('connection', (ws: any) => {
 			let uuid = randomUUID();
@@ -151,6 +152,10 @@ class Server {
 	public getActiveGames() {
 		return this.contents.getActiveGames();
 	}
+	
+	public reloadMaster() {
+		this.contents.setupData();
+	}
 }
 
 export function launchDGS(port: number) {
@@ -175,4 +180,10 @@ export function getActiveGames() {
 	if(gServer == null) return 0;
 	
 	return gServer.getActiveGames();
+}
+
+export function reloadMaster() {
+	if(gServer == null) return 0;
+	
+	return gServer.reloadMaster();
 }

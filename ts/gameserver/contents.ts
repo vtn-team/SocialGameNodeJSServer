@@ -29,10 +29,12 @@ export function createMessage(senderId: string, command: CMD, target:TARGET, dat
 
 class GameContainer {
 	protected gameId: number;
+	protected master: any;
 	protected queue: Array<any>;
 	
-	constructor(gameId: number) {
-		this.gameId = gameId;
+	constructor(master: any) {
+		this.master = master;
+		this.gameId = master.Id;
 		this.queue = [];
 	}
 }
@@ -41,11 +43,26 @@ export class VantanConnect {
 	games: any;
 	sessionDic: any;
 	broadcast: any;
-	
+
+	gameInfoMaster: any;
+	gameEventMaster: any;
+
 	constructor(bc: any) {
 		this.games = {};
 		this.sessionDic = {};
 		this.broadcast = bc;
+	}
+
+	public async setupData() {
+		let gameInfoReq = await fetch("https://script.google.com/macros/s/AKfycbyxclLktfu7L4q12Ak8bpS9EJtNFIYlL8c3sseezVJFGv1bJC8Tx00z5R_YJNhl9Qr0eQ/exec?sheet=GameInfo");
+		let gameInfoMaster = await gameInfoReq.json();
+		this.gameInfoMaster = gameInfoMaster.Data;
+		console.log(this.gameInfoMaster);
+		
+		let gameEventReq = await fetch("https://script.google.com/macros/s/AKfycbyxclLktfu7L4q12Ak8bpS9EJtNFIYlL8c3sseezVJFGv1bJC8Tx00z5R_YJNhl9Qr0eQ/exec?sheet=GameEvent");
+		let gameEventMaster = await gameEventReq.json();
+		this.gameEventMaster = gameEventMaster.Data;
+		console.log(this.gameEventMaster);
 	}
 
 	public execMessage(data: any) {
@@ -65,18 +82,33 @@ export class VantanConnect {
 	}
 
 	joinRoom(data: any) {
-		if(this.games[data.GameId]) {
+		let gameId = parseInt(data.GameId);
+		if(this.games[gameId]) {
 			
 		}
 		
-		if(data.GameId === 0) {
+		if(gameId === 0) {
 			console.log(`GAME ID:0 reject.`);
 			return ;
 		}
 		
-		this.games[data.GameId] = new GameContainer(data.GameId);
-		this.sessionDic[data.SessionId] = data.GameId;
-		console.log(`GAME ID:${data.GameId} join.`);
+		let find = false;
+		let master = null;
+		for(var m of this.gameInfoMaster){
+			if(parseInt(m.Id) == gameId){
+				find = true;
+				master = m;
+				break;
+			}
+		}
+		
+		if(find) {
+			this.games[gameId] = new GameContainer(master);
+			this.sessionDic[data.SessionId] = gameId;
+			console.log(`GAME ID:${gameId} - ${master.Name} join.`);
+		}else{
+			console.log(`GAME ID:${gameId} not found.`);
+		}
 	}
 	
 	public removeSession(sessionId: string) {

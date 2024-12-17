@@ -8,8 +8,6 @@ export enum TARGET {
 };
 
 (async () => {
-	let res = await fetch("https://script.google.com/macros/s/AKfycbyxclLktfu7L4q12Ak8bpS9EJtNFIYlL8c3sseezVJFGv1bJC8Tx00z5R_YJNhl9Qr0eQ/exec");
-	console.log(await res.json());
 	const cli = new client();
 	cli.on('connectFailed', (error: any) => {
 		console.log('Connect Error: ' + error.toString());
@@ -55,7 +53,7 @@ function execMessage(data: any) {
 		let json = {
 			SessionId: data.Data.SessionId,
 			Command: CMD.SEND_JOIN,
-			GameId: 10,
+			GameId: 1,
 		};
 		ret = JSON.stringify(json);
 	}
