@@ -1,0 +1,23 @@
+import { DisassociateAddressCommand, EC2Client } from "@aws-sdk/client-ec2";
+
+export const getElasticIPInfo = async ({ associationId }) => {
+  const client = new EC2Client({});
+  const command = new DisassociateAddressCommand({
+    // You can also use PublicIp, but that is for EC2 classic which is being retired.
+    AssociationId: associationId,
+  });
+
+  try {
+    await client.send(command);
+    console.log("Successfully disassociated address");
+  } catch (caught) {
+    if (
+      caught instanceof Error &&
+      caught.name === "InvalidAssociationID.NotFound"
+    ) {
+      console.warn(`${caught.message}.`);
+    } else {
+      throw caught;
+    }
+  }
+}

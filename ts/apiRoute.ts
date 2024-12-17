@@ -30,13 +30,17 @@ exports.Routes = {
 			"/stat" : "event#stat",
 			"/ranking" : "event#ranking",
 		},
-                "/cm" : {
+		"/cm" : {
 			"@uuid%s" : {
-                        	"/login" : "cm#login",
-                        	"/save" : "cm#save",
-               	        	"/list" : "cm#list",
-                        	"/attack" : "cm#attack"
-                	}
+				"/login" : "cm#login",
+				"/save" : "cm#save",
+				"/list" : "cm#list",
+				"/attack" : "cm#attack"
+			}
+		},
+		"/vc" : {
+			"/stat" : "vc#stat",
+			"/getaddr" : "vc#getaddr"
 		}
 	},
 	POST: {
@@ -62,14 +66,14 @@ exports.Routes = {
 			"/result" : "quest#result",
 			"/continue" : "quest#continue_act"
 		},
-                "/cm" : {
-                        "@uuid%s" : {
-                                "/login" : "cm#login",
-                                "/save" : "cm#save",
-                                "/list" : "cm#list",
-                                "/attack" : "cm#attack"
-                        }
-                }
+		"/cm" : {
+			"@uuid%s" : {
+				"/login" : "cm#login",
+				"/save" : "cm#save",
+				"/list" : "cm#list",
+				"/attack" : "cm#attack"
+			}
+		}
 	}
 }
 
